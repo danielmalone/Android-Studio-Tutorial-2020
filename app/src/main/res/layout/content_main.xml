@@ -9,7 +9,7 @@
     tools:showIn="@layout/activity_main">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/goToAddProduct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#009688"
