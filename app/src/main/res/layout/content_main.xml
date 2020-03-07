@@ -12,7 +12,7 @@
         android:id="@+id/goToAddProduct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="#009688"
+        android:backgroundTint="#03A9F4"
         android:text="Add to Inventory"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
