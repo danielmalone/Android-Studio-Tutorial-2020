@@ -1,12 +1,15 @@
 package com.example
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log.d
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.net.URL
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,11 +22,16 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, AddProductActivity::class.java))
         }
 
-        val preferences = getSharedPreferences("database", Context.MODE_PRIVATE)
-        val savedName = preferences.getString("savedProductName", "This value doesn't exist.")
-        d("daniel", "saved message is: $savedName")
 
-        lastSavedProduct.text = savedName
+
+
+        lifecycleScope.launch(Dispatchers.Default) {
+            val specialMessage =
+                URL("https://finepointmobile.com/api/inventory/v1/message").readText()
+            d("daniel", "The message is: $specialMessage")
+            lastSavedProduct.text = specialMessage
+        }
+
 
     }
 }
