@@ -2,14 +2,9 @@ package com.example
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log.d
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import java.net.URL
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,20 +13,27 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        goToAddProduct.setOnClickListener {
+        fab.setOnClickListener {
             startActivity(Intent(this, AddProductActivity::class.java))
         }
 
+        val products = listOf(
+            Product("iPod", "Daniel", 2006, 260.59),
+            Product("Pixel", "John", 2009, 12.34),
+            Product("Mac", "Nathan", 2020, 4999.99),
+            Product("Monitor", "Hannah", 1999, 500.00),
+            Product("Kotlin", "Mel", 1776, 0.0),
+            Product("MacBook Pro", "Daniel Malone", 2020, 4399.99)
+        )
 
+        var totalCost = 0.0
 
-
-        lifecycleScope.launch(Dispatchers.Default) {
-            val specialMessage =
-                URL("https://finepointmobile.com/api/inventory/v1/message").readText()
-            d("daniel", "The message is: $specialMessage")
-            lastSavedProduct.text = specialMessage
+        products.forEach {
+            productsTextView.append("${it.name} - ${it.owner} - ${it.yearPurchased} - $ ${it.cost} \n\n")
+            totalCost += it.cost
         }
 
+        totalCostTextView.text = "$ $totalCost"
 
     }
 }
